@@ -29,6 +29,9 @@ final class fizzbuzzTests: XCTestCase {
         if int == 3 {
             return "Fizz"
         }
+        if int == 15 {
+            return "FizzBuzz"
+        }
         return "\(int)"
     }
 }
