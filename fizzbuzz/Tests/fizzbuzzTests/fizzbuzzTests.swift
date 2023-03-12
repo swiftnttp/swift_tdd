@@ -15,6 +15,9 @@ final class fizzbuzzTests: XCTestCase {
     }
     
     func fizzbuzz(_ int: Int) -> String {
+        if int == 3 {
+            return "Fizz"
+        }
         return "\(int)"
     }
 }
