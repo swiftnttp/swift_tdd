@@ -8,9 +8,13 @@ final class fibonacciTests: XCTestCase {
     func testFibonacci() throws {
         XCTAssertEqual(fibonacci(0), 0)
         XCTAssertEqual(fibonacci(1), 1)
+        XCTAssertEqual(fibonacci(2), 1)
     }
     
     func fibonacci(_ input: Int) -> Int {
+        if input == 1 {
+            return 1
+        }
         return 0
     }
 }
