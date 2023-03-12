@@ -2,12 +2,16 @@ import XCTest
 @testable import fizzbuzz
 
 final class fizzbuzzTests: XCTestCase {
-    func testOne() throws {
+    func testOne() {
         XCTAssertEqual(fizzbuzz(1), "1")
     }
     
-    func testTwo() throws {
+    func testTwo() {
         XCTAssertEqual(fizzbuzz(2), "2")
+    }
+    
+    func testThree() {
+        XCTAssertEqual(fizzbuzz(3), "Fizz")
     }
     
     func fizzbuzz(_ int: Int) -> String {
