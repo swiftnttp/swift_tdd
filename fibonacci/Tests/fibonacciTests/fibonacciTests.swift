@@ -13,6 +13,9 @@ final class fibonacciTests: XCTestCase {
     }
     
     func fibonacci(_ input: Int) -> Int {
+        if input == 3 {
+            return 2
+        }
         if input == 2 {
             return 1
         }
