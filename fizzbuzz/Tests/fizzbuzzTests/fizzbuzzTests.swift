@@ -6,6 +6,10 @@ final class fizzbuzzTests: XCTestCase {
         XCTAssertEqual(fizzbuzz(1), "1")
     }
     
+    func testTwo() throws {
+        XCTAssertEqual(fizzbuzz(2), "2")
+    }
+    
     func fizzbuzz(_ int: Int) -> String {
         return "1"
     }
