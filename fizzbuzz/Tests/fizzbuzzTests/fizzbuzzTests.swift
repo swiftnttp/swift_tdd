@@ -14,6 +14,7 @@ final class fizzbuzzTests: XCTestCase {
     
     func testBuzz() {
         XCTAssertEqual(fizzbuzz(5), "Buzz")
+        XCTAssertEqual(fizzbuzz(10), "Buzz")
     }
     
     func testFizzBuzz() {
