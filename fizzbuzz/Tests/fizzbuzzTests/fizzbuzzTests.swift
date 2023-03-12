@@ -2,11 +2,8 @@ import XCTest
 @testable import fizzbuzz
 
 final class fizzbuzzTests: XCTestCase {
-    func testOne() {
+    func testNumbers() {
         XCTAssertEqual(fizzbuzz(1), "1")
-    }
-    
-    func testTwo() {
         XCTAssertEqual(fizzbuzz(2), "2")
     }
     
