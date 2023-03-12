@@ -9,9 +9,13 @@ final class fibonacciTests: XCTestCase {
         XCTAssertEqual(fibonacci(0), 0)
         XCTAssertEqual(fibonacci(1), 1)
         XCTAssertEqual(fibonacci(2), 1)
+        XCTAssertEqual(fibonacci(3), 2)
     }
     
     func fibonacci(_ input: Int) -> Int {
+        if input == 2 {
+            return 1
+        }
         if input == 1 {
             return 1
         }
