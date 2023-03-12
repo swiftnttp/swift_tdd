@@ -23,15 +23,15 @@ final class fizzbuzzTests: XCTestCase {
     }
     
     func fizzbuzz(_ int: Int) -> String {
-        if int % 5 == 0 && int % 3 == 0 {
+        switch int {
+        case int where int % 5 == 0 && int % 3 == 0:
             return "FizzBuzz"
-        }
-        if int % 5 == 0 {
+        case int where int % 5 == 0:
             return "Buzz"
-        }
-        if int % 3 == 0 {
+        case int where int % 3 == 0:
             return "Fizz"
+        default:
+            return "\(int)"
         }
-        return "\(int)"
     }
 }
