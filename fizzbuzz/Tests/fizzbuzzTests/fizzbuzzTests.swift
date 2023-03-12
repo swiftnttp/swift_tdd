@@ -10,12 +10,16 @@ final class fizzbuzzTests: XCTestCase {
         XCTAssertEqual(fizzbuzz(2), "2")
     }
     
-    func testThree() {
+    func testFizz() {
         XCTAssertEqual(fizzbuzz(3), "Fizz")
     }
     
-    func testFive() {
+    func testBuzz() {
         XCTAssertEqual(fizzbuzz(5), "Buzz")
+    }
+    
+    func testFizzBuzz() {
+        XCTAssertEqual(fizzbuzz(15), "FizzBuzz")
     }
     
     func fizzbuzz(_ int: Int) -> String {
