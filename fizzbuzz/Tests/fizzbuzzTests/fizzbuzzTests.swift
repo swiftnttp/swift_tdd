@@ -14,6 +14,10 @@ final class fizzbuzzTests: XCTestCase {
         XCTAssertEqual(fizzbuzz(3), "Fizz")
     }
     
+    func testFive() {
+        XCTAssertEqual(fizzbuzz(5), "Buzz")
+    }
+    
     func fizzbuzz(_ int: Int) -> String {
         if int == 3 {
             return "Fizz"
