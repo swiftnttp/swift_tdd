@@ -21,16 +21,13 @@ final class fizzbuzzTests: XCTestCase {
     }
     
     func fizzbuzz(_ int: Int) -> String {
-        if int == 5 {
-            return "Buzz"
-        }
-        if int == 3 {
-            return "Fizz"
-        }
         if int == 15 {
             return "FizzBuzz"
         }
-        if int == 6 {
+        if int == 5 {
+            return "Buzz"
+        }
+        if int % 3 == 0 {
             return "Fizz"
         }
         return "\(int)"
