@@ -23,7 +23,7 @@ final class fizzbuzzTests: XCTestCase {
     }
     
     func fizzbuzz(_ int: Int) -> String {
-        if int == 15 {
+        if int % 5 == 0 && int % 3 == 0 {
             return "FizzBuzz"
         }
         if int % 5 == 0 {
