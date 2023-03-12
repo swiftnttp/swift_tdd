@@ -8,4 +8,8 @@ final class fibonacciTests: XCTestCase {
     func testFibonacci() throws {
         XCTAssertEqual(fibonacci(0), 0)
     }
+    
+    func fibonacci(_ input: Int) -> Int {
+        return 0
+    }
 }
