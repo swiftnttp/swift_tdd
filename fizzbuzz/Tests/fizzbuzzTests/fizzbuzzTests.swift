@@ -25,7 +25,7 @@ final class fizzbuzzTests: XCTestCase {
         if int == 15 {
             return "FizzBuzz"
         }
-        if int == 5 {
+        if int % 5 == 0 {
             return "Buzz"
         }
         if int % 3 == 0 {
