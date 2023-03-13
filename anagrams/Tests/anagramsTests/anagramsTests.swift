@@ -23,23 +23,24 @@ final class anagramsTests: XCTestCase {
         XCTAssertEqual(anagrams("abc"), ["abc", "acb", "bac", "bca", "cab", "cba"])
     }
     
+    func testFourLetter() {
+        XCTAssertEqual(anagrams("biro"), ["biro", "bior", "brio", "broi", "boir", "bori", "ibro", "ibor", "irbo", "irob", "iobr", "iorb", "rbio", "rboi", "ribo", "riob", "robi", "roib", "obir", "obri", "oibr", "oirb", "orbi", "orib"])
+    }
+    
     func anagrams(_ val: String) -> [String] {
-        if val == "abc" {
-            var strings = [String]()
-            for i in 0..<val.count {
-                strings.append(val.at(i) + anagrams(val.drop(at: i))[0])
-                strings.append(val.at(i) + anagrams(val.drop(at: i))[1])
-            }
-            return strings
-        }
-        if val.count == 2 {
-            return [val.at(0) + val.at(1),
-                    val.at(1) + val.at(0)]
-        }
+        
         if val.count == 1 {
             return [val]
         }
-        return []
+        
+        var strings = [String]()
+        for i in 0..<val.count {
+            for k in 0..<anagrams(val.drop(at: i)).count {
+                strings.append(val.at(i) + anagrams(val.drop(at: i))[k])
+            }
+        }
+        return strings
+        
     }
 }
 
