@@ -23,8 +23,8 @@ final class anagramsTests: XCTestCase {
         if val == "ab" {
             return ["ab", "ba"]
         }
-        if val == "a" {
-            return ["a"]
+        if val.count == 1 {
+            return [val]
         }
         return []
     }
