@@ -10,4 +10,8 @@ final class anagramsTests: XCTestCase {
     func testEmptyString() {
         XCTAssertEqual(anagrams(""), [])
     }
+    
+    func anagrams(_ val: String) -> [String] {
+        []
+    }
 }
