@@ -8,20 +8,14 @@ final class fibonacciTests: XCTestCase {
     func testFibonacci() throws {
         XCTAssertEqual(fibonacci(0), 0)
         XCTAssertEqual(fibonacci(1), 1)
-        XCTAssertEqual(fibonacci(2), 1)
+        XCTAssertEqual(fibonacci(4), 1)
         XCTAssertEqual(fibonacci(3), 2)
     }
     
     func fibonacci(_ input: Int) -> Int {
-        if input == 3 {
-            return 2
+        if input == 0 || input == 1{
+            return input
         }
-        if input == 2 {
-            return 1
-        }
-        if input == 1 {
-            return 1
-        }
-        return 0
+        return fibonacci(input - 1) + fibonacci(input - 2)
     }
 }
