@@ -1,11 +1,13 @@
 import XCTest
 @testable import anagrams
 
+//• biro bior brio broi boir bori
+//• ibro ibor irbo irob iobr iorb
+//• rbio rboi ribo riob roib robi
+//• obir obri oibr oirb orbi orib
+
 final class anagramsTests: XCTestCase {
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct
-        // results.
-        XCTAssertEqual(anagrams().text, "Hello, World!")
+    func testEmptyString() {
+        XCTAssertEqual(anagrams(""), [])
     }
 }
