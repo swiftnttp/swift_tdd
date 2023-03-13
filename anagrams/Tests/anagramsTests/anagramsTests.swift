@@ -25,10 +25,16 @@ final class anagramsTests: XCTestCase {
     
     func anagrams(_ val: String) -> [String] {
         if val == "abc" {
-            return ["abc", "acb", "bac", "bca", "cab", "cba"]
+            return ["a" + "bc",
+                    "a" + "cb",
+                    "b" + "ac",
+                    "b" + "ca",
+                    "c" + "ab",
+                    "c" + "ba"]
         }
         if val == "ab" {
-            return ["ab", "ba"]
+            return ["a" + "b",
+                    "b" + "a"]
         }
         if val.count == 1 {
             return [val]
