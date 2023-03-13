@@ -32,13 +32,19 @@ final class anagramsTests: XCTestCase {
                     "c" + "ab",
                     "c" + "ba"]
         }
-        if val == "ab" {
-            return ["a" + "b",
-                    "b" + "a"]
+        if val.count == 2 {
+            return [val.at(0) + val.at(1),
+                    val.at(1) + val.at(0)]
         }
         if val.count == 1 {
             return [val]
         }
         return []
+    }
+}
+
+extension String {
+    func at(_ index: Int) -> String {
+        String(split(separator: "")[index])
     }
 }
