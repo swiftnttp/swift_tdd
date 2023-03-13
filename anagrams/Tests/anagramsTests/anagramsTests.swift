@@ -15,7 +15,14 @@ final class anagramsTests: XCTestCase {
         XCTAssertEqual(anagrams("a"), ["a"])
     }
     
+    func testTwoLetters() {
+        XCTAssertEqual(anagrams("ab"), ["ab", "ba"])
+    }
+    
     func anagrams(_ val: String) -> [String] {
-        []
+        if val == "a" {
+            return ["a"]
+        }
+        return []
     }
 }
