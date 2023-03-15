@@ -14,7 +14,12 @@ import XCTest
 //    "FALSE OR FALSE" -> false
 
 final class BooleanCalculatorTests: XCTestCase {
-    func testExample() {
+    func testSingleValue() {
         XCTAssertEqual(calculate("TRUE"), true)
+        XCTAssertEqual(calculate("FALSE"), false)
+    }
+    
+    func calculate(_ str: String) -> Bool {
+        return true
     }
 }
