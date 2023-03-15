@@ -23,13 +23,41 @@ final class BooleanCalculatorTests: XCTestCase {
         XCTAssertEqual(calculate("TRUE AND FALSE"), false)
     }
     
-    func calculate(_ str: String) -> Bool {
-        if str == "FALSE" {
-            return false
+    func testIncorrectString() {
+        XCTAssertEqual(calculate("klsdfjso"), nil)
+    }
+    
+    enum Token {
+        case bool(Bool)
+        case and
+    }
+    
+    func calculate(_ str: String) -> Bool? {
+        let arr = str.split(separator: " ")
+        var tokens = [Token]()
+        
+        for string in arr {
+            if string == "FALSE" {
+                tokens.append(.bool(false))
+            }
+            if string == "TRUE" {
+                tokens.append(.bool(true))
+            }
+            if string == "AND" {
+                tokens.append(.and)
+            }
         }
+
         if str == "TRUE AND FALSE" {
             return false
         }
-        return true
+
+        
+        if tokens.count > 0 {
+            if case let .bool(val) = tokens[0] {
+                return val
+            }
+        }
+        return nil
     }
 }
