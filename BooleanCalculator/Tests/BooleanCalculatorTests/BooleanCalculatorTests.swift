@@ -19,6 +19,10 @@ final class BooleanCalculatorTests: XCTestCase {
         XCTAssertEqual(calculate("FALSE"), false)
     }
     
+    func testAnd() {
+        XCTAssertEqual(calculate("TRUE AND FALSE"), false)
+    }
+    
     func calculate(_ str: String) -> Bool {
         if str == "FALSE" {
             return false
