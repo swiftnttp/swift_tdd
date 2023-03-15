@@ -11,6 +11,11 @@ final class RomanNumeralsTests: XCTestCase {
         XCTAssertEqual(romanNumerals(6), "VI")
         XCTAssertEqual(romanNumerals(7), "VII")
         XCTAssertEqual(romanNumerals(8), "VIII")
+        XCTAssertEqual(romanNumerals(9), "IX")
+        XCTAssertEqual(romanNumerals(10), "X")
+        XCTAssertEqual(romanNumerals(11), "XI")
+        XCTAssertEqual(romanNumerals(12), "XII")
+        XCTAssertEqual(romanNumerals(13), "XIII")
     }
     
     let dict = [1: "I", 4: "IV", 5: "V"]
