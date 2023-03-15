@@ -18,7 +18,7 @@ final class RomanNumeralsTests: XCTestCase {
         XCTAssertEqual(romanNumerals(13), "XIII")
     }
     
-    let dict = [1: "I", 4: "IV", 5: "V"]
+    let dict = [1: "I", 4: "IV", 5: "V", 9: "IX", 10: "X"]
     
     
     func romanNumerals(_ num: Int) -> String {
@@ -27,6 +27,9 @@ final class RomanNumeralsTests: XCTestCase {
         }
         if num > 5 && num <= 8 {
             return dict[5]! + romanNumerals(num - 5)
+        }
+        if num > 10 && num <= 13 {
+            return dict[10]! + romanNumerals(num - 10)
         }
         if num > 3 {
             if dict.keys.contains(num) {
