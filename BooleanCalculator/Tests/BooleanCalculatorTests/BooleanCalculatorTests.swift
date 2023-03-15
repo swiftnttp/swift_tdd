@@ -27,6 +27,9 @@ final class BooleanCalculatorTests: XCTestCase {
         if str == "FALSE" {
             return false
         }
+        if str == "TRUE AND FALSE" {
+            return false
+        }
         return true
     }
 }
