@@ -21,22 +21,15 @@ final class RomanNumeralsTests: XCTestCase {
     let dict = [1: "I", 4: "IV", 5: "V", 9: "IX", 10: "X"]
     
     
-    func romanNumerals(_ num: Int) -> String {
-        if num <= 3, num > 1 {
-            return dict[1]! + romanNumerals(num - 1)
+    func romanNumerals(_ number: Int) -> String {
+        var number = number
+        var string = ""
+        for key in dict.keys.sorted(by: >) {
+            while number >= key {
+                string += dict[key]!
+                number -= key
+            }
         }
-        if num > 5 && num <= 8 {
-            return dict[5]! + romanNumerals(num - 5)
-        }
-        if num > 10 && num <= 13 {
-            return dict[10]! + romanNumerals(num - 10)
-        }
-
-        if dict.keys.contains(num) {
-            return dict[num]!
-        }
-    
-    
-        return "error"
+        return string
     }
 }
