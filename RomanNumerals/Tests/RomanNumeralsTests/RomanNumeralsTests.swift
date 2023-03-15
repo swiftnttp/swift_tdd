@@ -7,6 +7,7 @@ final class RomanNumeralsTests: XCTestCase {
         XCTAssertEqual(romanNumerals(2), "II")
         XCTAssertEqual(romanNumerals(3), "III")
         XCTAssertEqual(romanNumerals(4), "IV")
+        XCTAssertEqual(romanNumerals(5), "V")
     }
     
     func romanNumerals(_ num: Int) -> String {
