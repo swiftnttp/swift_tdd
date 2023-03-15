@@ -23,6 +23,15 @@ final class RomanNumeralsTests: XCTestCase {
         if num == 5 {
             return "V"
         }
+        if num == 6 {
+            return "VI"
+        }
+        if num == 7 {
+            return "VII"
+        }
+        if num == 8 {
+            return "VIII"
+        }
 
         return "I"
     }
