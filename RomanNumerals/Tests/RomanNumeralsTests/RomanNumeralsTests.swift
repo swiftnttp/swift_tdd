@@ -13,19 +13,22 @@ final class RomanNumeralsTests: XCTestCase {
         XCTAssertEqual(romanNumerals(8), "VIII")
     }
     
-    let dict = [1: "I", 4: "IV", 5: "V",
-                6: "VI", 7: "VII", 8: "VIII"]
+    let dict = [1: "I", 4: "IV", 5: "V"]
     
     
     func romanNumerals(_ num: Int) -> String {
         if num <= 3, num > 1 {
             return dict[1]! + romanNumerals(num - 1)
         }
+        if num > 5 && num <= 8 {
+            return dict[5]! + romanNumerals(num - 5)
+        }
         if num > 3 {
             if dict.keys.contains(num) {
                 return dict[num]!
             }
         }
+    
         return dict[1]!
     }
 }
