@@ -31,12 +31,12 @@ final class RomanNumeralsTests: XCTestCase {
         if num > 10 && num <= 13 {
             return dict[10]! + romanNumerals(num - 10)
         }
-        if num > 3 {
-            if dict.keys.contains(num) {
-                return dict[num]!
-            }
+
+        if dict.keys.contains(num) {
+            return dict[num]!
         }
     
-        return dict[1]!
+    
+        return "error"
     }
 }
