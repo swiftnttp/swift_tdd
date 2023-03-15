@@ -8,6 +8,9 @@ final class RomanNumeralsTests: XCTestCase {
     }
     
     func romanNumerals(_ num: Int) -> String {
-        "I"
+        if num == 2 {
+            return "II"
+        }
+        return "I"
     }
 }
