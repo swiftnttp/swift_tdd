@@ -13,6 +13,9 @@ final class RomanNumeralsTests: XCTestCase {
         if num <= 3, num > 1 {
             return "I" + romanNumerals(num - 1)
         }
+        if num == 4 {
+            return "IV"
+        }
 
         return "I"
     }
