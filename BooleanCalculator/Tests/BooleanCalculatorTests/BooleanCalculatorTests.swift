@@ -20,6 +20,9 @@ final class BooleanCalculatorTests: XCTestCase {
     }
     
     func calculate(_ str: String) -> Bool {
+        if str == "FALSE" {
+            return false
+        }
         return true
     }
 }
