@@ -61,11 +61,15 @@ final class BooleanCalculatorTests: XCTestCase {
             return temp1 && temp2
         }
         
-        if tokens.count > 0 {
-            if case let .bool(val) = tokens[0] {
-                return val
+        for token in tokens {
+            switch token {
+            case .bool(let value):
+                return value
+            case .and:
+                break
             }
         }
+        
         return nil
     }
 }
