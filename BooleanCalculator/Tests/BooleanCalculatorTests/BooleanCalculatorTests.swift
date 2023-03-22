@@ -48,10 +48,18 @@ final class BooleanCalculatorTests: XCTestCase {
             }
         }
 
-        if str == "TRUE AND FALSE" {
-            return false
+        if tokens.count == 3 {
+            var temp1: Bool?
+            var temp2: Bool?
+            if case let .bool(val) = tokens[0] {
+                temp1 = val
+            }
+            if case let .bool(val) = tokens[2] {
+                temp2 = val
+            }
+            guard let temp1 = temp1, let temp2 = temp2 else { return nil }
+            return temp1 && temp2
         }
-
         
         if tokens.count > 0 {
             if case let .bool(val) = tokens[0] {
