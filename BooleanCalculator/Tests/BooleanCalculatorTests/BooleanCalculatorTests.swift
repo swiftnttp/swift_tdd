@@ -78,6 +78,13 @@ final class BooleanCalculatorTests: XCTestCase {
         XCTAssertEqual(calculate("FALSE OR FALSE"), false)
     }
     
+    func testLong() {
+        XCTAssertEqual(calculate("TRUE OR FALSE AND TRUE"), true)
+        XCTAssertEqual(calculate("TRUE OR FALSE OR FALSE"), true)
+        XCTAssertEqual(calculate("TRUE AND FALSE OR FALSE"), false)
+        XCTAssertEqual(calculate("TRUE AND FALSE OR TRUE"), true)
+    }
+    
     func testIncorrectString() {
         XCTAssertEqual(calculate("klsdfjso"), nil)
     }
