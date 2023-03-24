@@ -28,7 +28,7 @@ class Operand: Node {
     }
 }
 
-class Operator: Node {
+class And: Node {
     init(left: Node, right: Node) {
         self.left = left
         self.right = right
@@ -40,6 +40,21 @@ class Operator: Node {
     
     func evaluate() -> Bool {
         left.evaluate() && right.evaluate()
+    }
+}
+
+class Or: Node {
+    init(left: Node, right: Node) {
+        self.left = left
+        self.right = right
+    }
+    
+    var left: Node
+    var right: Node
+    
+    
+    func evaluate() -> Bool {
+        left.evaluate() || right.evaluate()
     }
 }
 
@@ -56,6 +71,13 @@ final class BooleanCalculatorTests: XCTestCase {
         XCTAssertEqual(calculate("FALSE AND FALSE"), false)
     }
     
+    func testOR() {
+        XCTAssertEqual(calculate("TRUE OR TRUE"), true)
+        XCTAssertEqual(calculate("TRUE OR FALSE"), true)
+        XCTAssertEqual(calculate("FALSE OR TRUE"), true)
+        XCTAssertEqual(calculate("FALSE OR FALSE"), false)
+    }
+    
     func testIncorrectString() {
         XCTAssertEqual(calculate("klsdfjso"), nil)
     }
@@ -63,6 +85,7 @@ final class BooleanCalculatorTests: XCTestCase {
     enum Token {
         case bool(Bool)
         case and
+        case or
     }
     
     func calculate(_ str: String) -> Bool? {
@@ -79,6 +102,9 @@ final class BooleanCalculatorTests: XCTestCase {
             if string == "AND" {
                 tokens.append(.and)
             }
+            if string == "OR" {
+                tokens.append(.or)
+            }
         }
         
         var node: Node?
@@ -93,7 +119,13 @@ final class BooleanCalculatorTests: XCTestCase {
             case .and:
                 i += 1
                 if case let .bool(val) = tokens[i] {
-                    let op = Operator(left: node!, right: Operand(value: val))
+                    let op = And(left: node!, right: Operand(value: val))
+                    node = op
+                }
+            case .or:
+                i += 1
+                if case let .bool(val) = tokens[i] {
+                    let op = Or(left: node!, right: Operand(value: val))
                     node = op
                 }
             }
