@@ -13,6 +13,36 @@ import XCTest
 //   "TRUE OR FALSE" -> true
 //    "FALSE OR FALSE" -> false
 
+protocol Node {
+    func evaluate() -> Bool
+}
+
+class Operand: Node {
+    let value: Bool
+    init(value: Bool) {
+        self.value = value
+    }
+    
+    func evaluate() -> Bool {
+        value
+    }
+}
+
+class Operator: Node {
+    init(left: Node, right: Node) {
+        self.left = left
+        self.right = right
+    }
+    
+    var left: Node
+    var right: Node
+    
+    
+    func evaluate() -> Bool {
+        left.evaluate() && right.evaluate()
+    }
+}
+
 final class BooleanCalculatorTests: XCTestCase {
     func testSingleValue() {
         XCTAssertEqual(calculate("TRUE"), true)
@@ -20,7 +50,10 @@ final class BooleanCalculatorTests: XCTestCase {
     }
     
     func testAnd() {
+        XCTAssertEqual(calculate("TRUE AND TRUE"), true)
         XCTAssertEqual(calculate("TRUE AND FALSE"), false)
+        XCTAssertEqual(calculate("FALSE AND TRUE"), false)
+        XCTAssertEqual(calculate("FALSE AND FALSE"), false)
     }
     
     func testIncorrectString() {
@@ -47,29 +80,27 @@ final class BooleanCalculatorTests: XCTestCase {
                 tokens.append(.and)
             }
         }
-
-        if tokens.count == 3 {
-            var temp1: Bool?
-            var temp2: Bool?
-            if case let .bool(val) = tokens[0] {
-                temp1 = val
-            }
-            if case let .bool(val) = tokens[2] {
-                temp2 = val
-            }
-            guard let temp1 = temp1, let temp2 = temp2 else { return nil }
-            return temp1 && temp2
-        }
         
-        for token in tokens {
+        var node: Node?
+        print(tokens)
+        var i = 0
+        while i < tokens.count {
+            let token = tokens[i]
+            
             switch token {
             case .bool(let value):
-                return value
+                node = Operand(value: value)
             case .and:
-                break
+                i += 1
+                if case let .bool(val) = tokens[i] {
+                    let op = Operator(left: node!, right: Operand(value: val))
+                    node = op
+                }
             }
+            
+            i += 1
         }
         
-        return nil
+        return node?.evaluate()
     }
 }
