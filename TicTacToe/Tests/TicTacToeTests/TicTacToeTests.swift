@@ -23,9 +23,14 @@ struct Board {
     var moves = [Move]()
     
     func applyMove(_ position: Position) -> Board {
-        return Board(
-            currentPlayer: "O",
-            moves: moves + [Move(player: currentPlayer, position: position)])
+        var board = self
+        board.moves.append(Move(player: currentPlayer, position: position))
+        board.currentPlayer = nextPlayer()
+        return board
+    }
+    
+    private func nextPlayer() -> String {
+        currentPlayer == "X" ? "O" : "X"
     }
 }
 
