@@ -13,7 +13,7 @@ struct Board {
     var moves: [String] = []
     
     func applyMove(_ player: String) -> Board {
-        return Board(moves: [player])
+        return Board(moves: moves + [player])
     }
 }
 
