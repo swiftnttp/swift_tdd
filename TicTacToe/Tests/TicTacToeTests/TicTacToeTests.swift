@@ -8,12 +8,23 @@ import XCTest
 //• A player with three X's or O's in a row (horizontally, vertically, or diagonally) wins
 //• If all nine squares are filled and neither player achieves three in a row, the game is a draw
 
+struct Position {
+    let x: Int
+    let y: Int
+}
+
+struct Move {
+    let player: String
+    let position: Position
+}
+
 struct Board {
     var currentPlayer = "X"
-    var moves: [String] = []
+    var movesOLD: [String] = []
+    var moves = [Move]()
     
     func applyMove() -> Board {
-        return Board(currentPlayer: "O" ,moves: moves + [currentPlayer])
+        return Board(currentPlayer: "O" ,movesOLD: movesOLD + [currentPlayer])
     }
 }
 
@@ -22,7 +33,7 @@ final class TicTacToeTests: XCTestCase {
         let board = Board()
             .applyMove()
         
-        XCTAssertEqual(board.moves, ["X"])
+        XCTAssertEqual(board.movesOLD, ["X"])
     }
     
     func testPlayerOGoesSecond() {
@@ -30,7 +41,6 @@ final class TicTacToeTests: XCTestCase {
             .applyMove()
             .applyMove()
         
-        XCTAssertEqual(board.moves, ["X", "O"])
-
+        XCTAssertEqual(board.movesOLD, ["X", "O"])
     }
 }
