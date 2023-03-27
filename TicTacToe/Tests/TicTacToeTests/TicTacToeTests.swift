@@ -12,7 +12,7 @@ enum BoardError: Error {
     case positionIsPlayed
 }
 
-struct Position {
+struct Position: Equatable {
     let x: Int
     let y: Int
 }
@@ -33,8 +33,11 @@ struct Board {
         return board
     }
     
-    func applyMove(_ position: Position) -> Result<Board, Error> {
-        .success(applyMoveOLD(position))
+    func applyMove(_ position: Position) -> Result<Board, BoardError> {
+        if moves.contains(where: { $0.position == position }) {
+            return .failure(.positionIsPlayed)
+        }
+        return .success(applyMoveOLD(position))
     }
     
     private func nextPlayer() -> String {
