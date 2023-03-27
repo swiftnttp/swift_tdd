@@ -8,6 +8,10 @@ import XCTest
 //• A player with three X's or O's in a row (horizontally, vertically, or diagonally) wins
 //• If all nine squares are filled and neither player achieves three in a row, the game is a draw
 
+enum BoardError: Error {
+    case positionIsPlayed
+}
+
 struct Position {
     let x: Int
     let y: Int
@@ -22,11 +26,15 @@ struct Board {
     var currentPlayer = "X"
     var moves = [Move]()
     
-    func applyMove(_ position: Position) -> Board {
+    func applyMoveOLD(_ position: Position) -> Board {
         var board = self
         board.moves.append(Move(player: currentPlayer, position: position))
         board.currentPlayer = nextPlayer()
         return board
+    }
+    
+    func applyMove(_ position: Position) -> Result<Board, Error> {
+        .success(applyMoveOLD(position))
     }
     
     private func nextPlayer() -> String {
@@ -37,25 +45,35 @@ struct Board {
 final class TicTacToeTests: XCTestCase {
     func testPlayerXGoesFirst() {
         let board = Board()
-            .applyMove(Position(x: 0, y: 0))
+            .applyMoveOLD(Position(x: 0, y: 0))
         
         XCTAssertEqual(board.moves.last?.player, "X")
     }
     
     func testPlayerOGoesSecond() {
         let board = Board()
-            .applyMove(Position(x: 0, y: 0))
-            .applyMove(Position(x: 1, y: 1))
+            .applyMoveOLD(Position(x: 0, y: 0))
+            .applyMoveOLD(Position(x: 1, y: 1))
         
         XCTAssertEqual(board.moves.last?.player, "O")
     }
     
     func testPlayerXGoesThird() {
         let board = Board()
-            .applyMove(Position(x: 0, y: 0))
-            .applyMove(Position(x: 1, y: 1))
-            .applyMove(Position(x: 2, y: 2))
+            .applyMoveOLD(Position(x: 0, y: 0))
+            .applyMoveOLD(Position(x: 1, y: 1))
+            .applyMoveOLD(Position(x: 2, y: 2))
         
         XCTAssertEqual(board.moves.last?.player, "X")
+    }
+    
+    func testPlayerCannotPlayOnPlayedPosition() {
+        let board = Board()
+            .applyMoveOLD(Position(x: 0, y: 0))
+        let result = board
+            .applyMove(Position(x: 0, y: 0))
+        XCTAssertThrowsError(try result.get()) { error in
+            XCTAssertEqual(error as? BoardError, .positionIsPlayed)
+        }
     }
 }
