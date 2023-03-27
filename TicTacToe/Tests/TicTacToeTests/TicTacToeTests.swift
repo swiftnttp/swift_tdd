@@ -27,13 +27,17 @@ struct Board {
     var moves = [Move]()
     
     func applyMove(_ position: Position) -> Result<Board, BoardError> {
-        if moves.contains(where: { $0.position == position }) {
+        guard !checkIfPlayedPosition(position) else {
             return .failure(.positionIsPlayed)
         }
         var board = self
         board.moves.append(Move(player: currentPlayer, position: position))
         board.currentPlayer = nextPlayer()
         return .success(board)
+    }
+    
+    private func checkIfPlayedPosition(_ position: Position) -> Bool {
+        moves.contains { $0.position == position }
     }
     
     private func nextPlayer() -> String {
