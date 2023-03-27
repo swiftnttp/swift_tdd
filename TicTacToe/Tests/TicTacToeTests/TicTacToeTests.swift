@@ -44,4 +44,13 @@ final class TicTacToeTests: XCTestCase {
         
         XCTAssertEqual(board.moves.last?.player, "O")
     }
+    
+    func testPlayerXGoesThird() {
+        let board = Board()
+            .applyMove(Position(x: 0, y: 0))
+            .applyMove(Position(x: 1, y: 1))
+            .applyMove(Position(x: 2, y: 2))
+        
+        XCTAssertEqual(board.moves.last?.player, "X")
+    }
 }
