@@ -9,26 +9,26 @@ import XCTest
 //• If all nine squares are filled and neither player achieves three in a row, the game is a draw
 
 struct Board {
-    
+    var currentPlayer = "X"
     var moves: [String] = []
     
-    func applyMove(_ player: String) -> Board {
-        return Board(moves: moves + [player])
+    func applyMove() -> Board {
+        return Board(currentPlayer: "O" ,moves: moves + [currentPlayer])
     }
 }
 
 final class TicTacToeTests: XCTestCase {
     func testPlayerXGoesFirst() {
         let board = Board()
-            .applyMove("X")
+            .applyMove()
         
         XCTAssertEqual(board.moves, ["X"])
     }
     
     func testPlayerOGoesSecond() {
         let board = Board()
-            .applyMove("X")
-            .applyMove("O")
+            .applyMove()
+            .applyMove()
         
         XCTAssertEqual(board.moves, ["X", "O"])
 
