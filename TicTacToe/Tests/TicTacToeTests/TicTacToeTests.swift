@@ -71,10 +71,10 @@ final class TicTacToeTests: XCTestCase {
     }
     
     func testPlayerCannotPlayOnPlayedPosition() {
-        let board = Board()
-            .applyMoveOLD(Position(x: 0, y: 0))
-        let result = board
+        let result = Board()
             .applyMove(Position(x: 0, y: 0))
+            .flatMap { $0.applyMove(Position(x: 0, y: 0)) }
+        
         XCTAssertThrowsError(try result.get()) { error in
             XCTAssertEqual(error as? BoardError, .positionIsPlayed)
         }
