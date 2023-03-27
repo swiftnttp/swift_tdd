@@ -71,12 +71,19 @@ final class TicTacToeTests: XCTestCase {
     }
     
     func testPlayerCannotPlayOnPlayedPosition() {
-        let result = Board()
-            .applyMove(Position(x: 0, y: 0))
-            .flatMap { $0.applyMove(Position(x: 0, y: 0)) }
+        let board = Board()
+            .applyMoveUnsafe(Position(x: 0, y: 0))
+        
+        let result = board.applyMove(Position(x: 0, y: 0))
         
         XCTAssertThrowsError(try result.get()) { error in
             XCTAssertEqual(error as? BoardError, .positionIsPlayed)
         }
+    }
+}
+
+private extension Board {
+    func applyMoveUnsafe(_ position: Position) -> Board {
+        try! applyMove(position).get()
     }
 }
