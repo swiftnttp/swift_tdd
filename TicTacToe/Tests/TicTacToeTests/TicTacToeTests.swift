@@ -12,14 +12,14 @@ struct Board {
     
     var moves: [String] = []
     
-    func applyMove(_ player: String) {
-        
+    mutating func applyMove(_ player: String) {
+        moves.append(player)
     }
 }
 
 final class TicTacToeTests: XCTestCase {
     func testPlayerXGoesFirst() throws {
-        let board = Board()
+        var board = Board()
         
         board.applyMove("X")
         
