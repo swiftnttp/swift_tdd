@@ -26,13 +26,6 @@ struct Board {
     var currentPlayer = "X"
     var moves = [Move]()
     
-    func applyMoveOLD(_ position: Position) -> Board {
-        var board = self
-        board.moves.append(Move(player: currentPlayer, position: position))
-        board.currentPlayer = nextPlayer()
-        return board
-    }
-    
     func applyMove(_ position: Position) -> Result<Board, BoardError> {
         if moves.contains(where: { $0.position == position }) {
             return .failure(.positionIsPlayed)
