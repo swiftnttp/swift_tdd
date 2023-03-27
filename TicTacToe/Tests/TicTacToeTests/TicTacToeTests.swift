@@ -10,6 +10,7 @@ import XCTest
 
 enum BoardError: Error {
     case positionIsPlayed
+    case positionIsOutOfTheBoard
 }
 
 struct Position: Equatable {
@@ -78,6 +79,16 @@ final class TicTacToeTests: XCTestCase {
         
         XCTAssertThrowsError(try result.get()) { error in
             XCTAssertEqual(error as? BoardError, .positionIsPlayed)
+        }
+    }
+    
+    func testPlayerCannotPlayOutsideOfTheBoard() {
+        let board = Board()
+        
+        let result = board.applyMove(Position(x: 4, y: 4))
+        
+        XCTAssertThrowsError(try result.get()) { error in
+            XCTAssertEqual(error as? BoardError, .positionIsOutOfTheBoard)
         }
     }
 }
