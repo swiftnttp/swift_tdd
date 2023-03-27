@@ -37,7 +37,10 @@ struct Board {
         if moves.contains(where: { $0.position == position }) {
             return .failure(.positionIsPlayed)
         }
-        return .success(applyMoveOLD(position))
+        var board = self
+        board.moves.append(Move(player: currentPlayer, position: position))
+        board.currentPlayer = nextPlayer()
+        return .success(board)
     }
     
     private func nextPlayer() -> String {
@@ -48,24 +51,24 @@ struct Board {
 final class TicTacToeTests: XCTestCase {
     func testPlayerXGoesFirst() {
         let board = Board()
-            .applyMoveOLD(Position(x: 0, y: 0))
+            .applyMoveUnsafe(Position(x: 0, y: 0))
         
         XCTAssertEqual(board.moves.last?.player, "X")
     }
     
     func testPlayerOGoesSecond() {
         let board = Board()
-            .applyMoveOLD(Position(x: 0, y: 0))
-            .applyMoveOLD(Position(x: 1, y: 1))
+            .applyMoveUnsafe(Position(x: 0, y: 0))
+            .applyMoveUnsafe(Position(x: 1, y: 1))
         
         XCTAssertEqual(board.moves.last?.player, "O")
     }
     
     func testPlayerXGoesThird() {
         let board = Board()
-            .applyMoveOLD(Position(x: 0, y: 0))
-            .applyMoveOLD(Position(x: 1, y: 1))
-            .applyMoveOLD(Position(x: 2, y: 2))
+            .applyMoveUnsafe(Position(x: 0, y: 0))
+            .applyMoveUnsafe(Position(x: 1, y: 1))
+            .applyMoveUnsafe(Position(x: 2, y: 2))
         
         XCTAssertEqual(board.moves.last?.player, "X")
     }
