@@ -20,27 +20,28 @@ struct Move {
 
 struct Board {
     var currentPlayer = "X"
-    var movesOLD: [String] = []
     var moves = [Move]()
     
-    func applyMove() -> Board {
-        return Board(currentPlayer: "O" ,movesOLD: movesOLD + [currentPlayer])
+    func applyMove(_ position: Position) -> Board {
+        return Board(
+            currentPlayer: "O",
+            moves: moves + [Move(player: currentPlayer, position: position)])
     }
 }
 
 final class TicTacToeTests: XCTestCase {
     func testPlayerXGoesFirst() {
         let board = Board()
-            .applyMove()
+            .applyMove(Position(x: 0, y: 0))
         
-        XCTAssertEqual(board.movesOLD, ["X"])
+        XCTAssertEqual(board.moves.last?.player, "X")
     }
     
     func testPlayerOGoesSecond() {
         let board = Board()
-            .applyMove()
-            .applyMove()
+            .applyMove(Position(x: 0, y: 0))
+            .applyMove(Position(x: 1, y: 1))
         
-        XCTAssertEqual(board.movesOLD, ["X", "O"])
+        XCTAssertEqual(board.moves.last?.player, "O")
     }
 }
