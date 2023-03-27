@@ -12,17 +12,25 @@ struct Board {
     
     var moves: [String] = []
     
-    mutating func applyMove(_ player: String) {
-        moves.append(player)
+    func applyMove(_ player: String) -> Board {
+        return Board(moves: [player])
     }
 }
 
 final class TicTacToeTests: XCTestCase {
-    func testPlayerXGoesFirst() throws {
-        var board = Board()
-        
-        board.applyMove("X")
+    func testPlayerXGoesFirst() {
+        let board = Board()
+            .applyMove("X")
         
         XCTAssertEqual(board.moves, ["X"])
+    }
+    
+    func testPlayerOGoesSecond() {
+        let board = Board()
+            .applyMove("X")
+            .applyMove("O")
+        
+        XCTAssertEqual(board.moves, ["X", "O"])
+
     }
 }
