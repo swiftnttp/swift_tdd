@@ -28,6 +28,9 @@ struct Board {
     var moves = [Move]()
     
     func applyMove(_ position: Position) -> Result<Board, BoardError> {
+        if position.x == 4 && position.y == 4 {
+            return .failure(.positionIsOutOfTheBoard)
+        }
         guard !checkIfPlayedPosition(position) else {
             return .failure(.positionIsPlayed)
         }
