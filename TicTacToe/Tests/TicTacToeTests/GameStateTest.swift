@@ -60,6 +60,11 @@ final class GameStateTest: XCTestCase {
         if firstColumn.allSatisfy({ $0.player == "X"}) && firstColumn.count == 3 {
             return .userWon(.X)
         }
+        
+        let firstRow = board.moves.filter { $0.position.y == 0 }
+        if firstRow.allSatisfy({ $0.player == "X"}) && firstRow.count == 3 {
+            return .userWon(.X)
+        }
 
         return .gameInProgress
     }
