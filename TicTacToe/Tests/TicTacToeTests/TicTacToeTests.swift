@@ -17,11 +17,11 @@ struct Position: Equatable {
     let x: Int
     let y: Int
     
-    static func make(_ x: Int, _ y: Int) -> Position? {
+    static func make(_ x: Int, _ y: Int) -> Result<Position, BoardError> {
         if x == 4 && y == 4 {
-            return nil
+            return .failure(.positionIsOutOfTheBoard)
         } else {
-            return Position(x: x, y: y)
+            return .success(Position(x: x, y: y))
         }
     }
 }
@@ -36,9 +36,6 @@ struct Board {
     var moves = [Move]()
     
     func applyMove(_ position: Position) -> Result<Board, BoardError> {
-        if Position.make(position.x, position.y) == nil {
-            return .failure(.positionIsOutOfTheBoard)
-        }
         guard !checkIfPlayedPosition(position) else {
             return .failure(.positionIsPlayed)
         }
@@ -94,9 +91,7 @@ final class TicTacToeTests: XCTestCase {
     }
     
     func testPlayerCannotPlayOutsideOfTheBoard() {
-        let board = Board()
-        
-        let result = board.applyMove(Position(x: 4, y: 4))
+        let result = Position.make(4, 4)
         
         XCTAssertThrowsError(try result.get()) { error in
             XCTAssertEqual(error as? BoardError, .positionIsOutOfTheBoard)
