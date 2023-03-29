@@ -40,7 +40,27 @@ final class GameStateTest: XCTestCase {
         XCTAssertEqual(state, .userWon(.X))
     }
     
+    func testXWonHorizontally() {
+        let board = Board()
+            .applyMoveUnsafe(Position(x: 0, y: 0))
+            .applyMoveUnsafe(Position(x: 0, y: 2))
+            .applyMoveUnsafe(Position(x: 1, y: 0))
+            .applyMoveUnsafe(Position(x: 0, y: 1))
+            .applyMoveUnsafe(Position(x: 2, y: 0))
+        
+        
+        let state = gameState(board)
+        
+        XCTAssertEqual(state, .userWon(.X))
+    }
+    
     func gameState(_ board: Board) -> GameState {
+        let firstColumn = board.moves.filter { $0.position.x == 0 }
+        
+        if firstColumn.allSatisfy({ $0.player == "X"}) && firstColumn.count == 3 {
+            return .userWon(.X)
+        }
+
         return .gameInProgress
     }
 }
