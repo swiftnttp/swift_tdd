@@ -65,9 +65,14 @@ final class GameStateTest: XCTestCase {
             }
         }
         
-        let firstRow = board.moves.filter { $0.position.y == 0 }
-        if firstRow.allSatisfy({ $0.player == "X"}) && firstRow.count == 3 {
-            return .userWon(.X)
+        for i in 0...2 {
+            let row = board.moves.filter { $0.position.y == i }
+            
+            if row.count == 3 {
+                if row[0].player == row[1].player && row[1].player == row[2].player {
+                    return .userWon(row[0].player == "X" ? .X : .Y)
+                }
+            }
         }
 
         return .gameInProgress
