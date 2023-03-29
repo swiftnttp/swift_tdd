@@ -16,6 +16,14 @@ enum BoardError: Error {
 struct Position: Equatable {
     let x: Int
     let y: Int
+    
+    static func make(_ x: Int, _ y: Int) -> Position? {
+        if x == 4 && y == 4 {
+            return nil
+        } else {
+            return Position(x: x, y: y)
+        }
+    }
 }
 
 struct Move {
@@ -28,7 +36,7 @@ struct Board {
     var moves = [Move]()
     
     func applyMove(_ position: Position) -> Result<Board, BoardError> {
-        if position.x == 4 && position.y == 4 {
+        if Position.make(position.x, position.y) == nil {
             return .failure(.positionIsOutOfTheBoard)
         }
         guard !checkIfPlayedPosition(position) else {
