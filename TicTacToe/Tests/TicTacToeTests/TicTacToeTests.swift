@@ -13,19 +13,6 @@ enum BoardError: Error {
     case positionIsOutOfTheBoard
 }
 
-struct Position: Equatable {
-    let x: Int
-    let y: Int
-    
-    static func make(_ x: Int, _ y: Int) -> Result<Position, BoardError> {
-        if x == 4 && y == 4 {
-            return .failure(.positionIsOutOfTheBoard)
-        } else {
-            return .success(Position(x: x, y: y))
-        }
-    }
-}
-
 struct Move {
     let player: String
     let position: Position
@@ -87,14 +74,6 @@ final class TicTacToeTests: XCTestCase {
         
         XCTAssertThrowsError(try result.get()) { error in
             XCTAssertEqual(error as? BoardError, .positionIsPlayed)
-        }
-    }
-    
-    func testPlayerCannotPlayOutsideOfTheBoard() {
-        let result = Position.make(4, 4)
-        
-        XCTAssertThrowsError(try result.get()) { error in
-            XCTAssertEqual(error as? BoardError, .positionIsOutOfTheBoard)
         }
     }
 }
