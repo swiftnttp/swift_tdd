@@ -55,10 +55,14 @@ final class GameStateTest: XCTestCase {
     }
     
     func gameState(_ board: Board) -> GameState {
-        let firstColumn = board.moves.filter { $0.position.x == 0 }
-        
-        if firstColumn.allSatisfy({ $0.player == "X"}) && firstColumn.count == 3 {
-            return .userWon(.X)
+        for i in 0...2 {
+            let column = board.moves.filter { $0.position.x == i }
+            
+            if column.count == 3 {
+                if column[0].player == column[1].player && column[1].player == column[2].player {
+                    return .userWon(column[0].player == "X" ? .X : .Y)
+                }
+            }
         }
         
         let firstRow = board.moves.filter { $0.position.y == 0 }
