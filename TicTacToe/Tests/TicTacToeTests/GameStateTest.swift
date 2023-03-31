@@ -68,6 +68,21 @@ final class GameStateTest: XCTestCase {
         XCTAssertEqual(state, .userWon(.X))
     }
     
+    func testYWonDiagonally() {
+        let board = Board()
+            .applyMoveUnsafe(Position(x: 0, y: 0))
+            .applyMoveUnsafe(Position(x: 0, y: 3))
+            .applyMoveUnsafe(Position(x: 3, y: 3))
+            .applyMoveUnsafe(Position(x: 1, y: 1))
+            .applyMoveUnsafe(Position(x: 3, y: 2))
+            .applyMoveUnsafe(Position(x: 3, y: 0))
+        
+        
+        let state = gameState(board)
+        
+        XCTAssertEqual(state, .userWon(.X))
+    }
+    
     func gameState(_ board: Board) -> GameState {
         for i in 0...2 {
             let column = board.moves.filter { $0.position.x == i }
