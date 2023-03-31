@@ -110,6 +110,13 @@ final class GameStateTest: XCTestCase {
             let player = board.moves.first(where: { $0.position.y == 0 && $0.position.x == 0 })!.player
             return .userWon(player == "X" ? .X : .Y)
         }
+        
+        if board.moves.contains(where: { $0.position.y == 0 && $0.position.x == 3 }) &&
+            board.moves.contains(where: { $0.position.y == 1 && $0.position.x == 1 }) &&
+            board.moves.contains(where: { $0.position.y == 3 && $0.position.x == 0 }) {
+            let player = board.moves.first(where: { $0.position.y == 0 && $0.position.x == 0 })!.player
+            return .userWon(player == "X" ? .X : .Y)
+        }
 
         return .gameInProgress
     }
