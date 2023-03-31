@@ -22,7 +22,8 @@ struct Move {
 }
 
 struct Board {
-    var currentPlayer = "X"
+    var currentPlayerStr = "X"
+    var currentPlayer: Player = .X
     var moves = [Move]()
     
     func applyMove(_ position: Position) -> Result<Board, BoardError> {
@@ -30,8 +31,9 @@ struct Board {
             return .failure(.positionIsPlayed)
         }
         var board = self
-        board.moves.append(Move(playerString: currentPlayer, position: position))
-        board.currentPlayer = nextPlayer()
+        board.moves.append(Move(playerString: currentPlayerStr, position: position))
+        board.currentPlayerStr = nextPlayer()
+        board.currentPlayer = currentPlayer == .X ? .O : .X
         return .success(board)
     }
     
@@ -40,7 +42,7 @@ struct Board {
     }
     
     private func nextPlayer() -> String {
-        currentPlayer == "X" ? "O" : "X"
+        currentPlayerStr == "X" ? "O" : "X"
     }
 }
 
