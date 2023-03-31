@@ -6,9 +6,15 @@
 //
 
 import XCTest
-
-enum Event {
+/*
+ Game started
+ Updated board
+ Failed
+ */
+enum Event: Equatable {
+    
     case gameStarted
+    case boardUpdated(Board)
 }
 
 final class TicTacToeTest: XCTestCase {
@@ -17,7 +23,11 @@ final class TicTacToeTest: XCTestCase {
         XCTAssertEqual(process(), [.gameStarted])
     }
     
-    func process() -> [Event] {
+    func testReceiveUpdatedBoardUponMove() {
+        XCTAssertEqual(process([0, 0]), [.boardUpdated])
+    }
+    
+    func process(_ input: [Int] = []) -> [Event] {
         [.gameStarted]
     }
 }

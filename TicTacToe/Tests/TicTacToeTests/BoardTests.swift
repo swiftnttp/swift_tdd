@@ -13,12 +13,13 @@ enum BoardError: Error {
     case positionIsOutOfTheBoard
 }
 
-struct Move {
+struct Move: Equatable {
     let player: Player
     let position: Position
 }
 
-struct Board {
+struct Board: Equatable {
+    
     var currentPlayer: Player = .X
     var moves = [Move]()
     
