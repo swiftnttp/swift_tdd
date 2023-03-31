@@ -37,7 +37,7 @@ struct Board {
     }
 }
 
-final class TicTacToeTests: XCTestCase {
+final class BoardTests: XCTestCase {
     func testPlayerXGoesFirst() {
         let board = Board()
             .applyMoveUnsafe(Position(x: 0, y: 0))
