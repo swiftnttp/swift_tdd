@@ -14,15 +14,11 @@ enum BoardError: Error {
 }
 
 struct Move {
-    let playerString: String
-    var player: Player {
-        playerString == "X" ? .X : .O
-    }
+    let player: Player
     let position: Position
 }
 
 struct Board {
-    var currentPlayerStr = "X"
     var currentPlayer: Player = .X
     var moves = [Move]()
     
@@ -31,18 +27,13 @@ struct Board {
             return .failure(.positionIsPlayed)
         }
         var board = self
-        board.moves.append(Move(playerString: currentPlayerStr, position: position))
-        board.currentPlayerStr = nextPlayer()
+        board.moves.append(Move(player: currentPlayer, position: position))
         board.currentPlayer = currentPlayer == .X ? .O : .X
         return .success(board)
     }
     
     private func checkIfPlayedPosition(_ position: Position) -> Bool {
         moves.contains { $0.position == position }
-    }
-    
-    private func nextPlayer() -> String {
-        currentPlayerStr == "X" ? "O" : "X"
     }
 }
 
