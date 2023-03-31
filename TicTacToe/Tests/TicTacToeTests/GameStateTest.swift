@@ -8,7 +8,7 @@
 import XCTest
 
 enum Player {
-    case X, Y
+    case X, O
 }
 
 enum GameState: Equatable {
@@ -88,8 +88,8 @@ final class GameStateTest: XCTestCase {
             let column = board.moves.filter { $0.position.x == i }
             
             if column.count == 3 {
-                if column[0].player == column[1].player && column[1].player == column[2].player {
-                    return .userWon(column[0].player == "X" ? .X : .Y)
+                if column[0].playerString == column[1].playerString && column[1].playerString == column[2].playerString {
+                    return .userWon(column[0].player)
                 }
             }
         }
@@ -98,8 +98,8 @@ final class GameStateTest: XCTestCase {
             let row = board.moves.filter { $0.position.y == i }
             
             if row.count == 3 {
-                if row[0].player == row[1].player && row[1].player == row[2].player {
-                    return .userWon(row[0].player == "X" ? .X : .Y)
+                if row[0].playerString == row[1].playerString && row[1].playerString == row[2].playerString {
+                    return .userWon(row[0].player)
                 }
             }
         }
@@ -108,14 +108,14 @@ final class GameStateTest: XCTestCase {
             board.moves.contains(where: { $0.position.y == 1 && $0.position.x == 1 }) &&
             board.moves.contains(where: { $0.position.y == 2 && $0.position.x == 2 }) {
             let player = board.moves.first(where: { $0.position.y == 0 && $0.position.x == 0 })!.player
-            return .userWon(player == "X" ? .X : .Y)
+            return .userWon(player)
         }
         
         if board.moves.contains(where: { $0.position.y == 0 && $0.position.x == 3 }) &&
             board.moves.contains(where: { $0.position.y == 1 && $0.position.x == 1 }) &&
             board.moves.contains(where: { $0.position.y == 3 && $0.position.x == 0 }) {
             let player = board.moves.first(where: { $0.position.y == 0 && $0.position.x == 0 })!.player
-            return .userWon(player == "X" ? .X : .Y)
+            return .userWon(player)
         }
 
         return .gameInProgress

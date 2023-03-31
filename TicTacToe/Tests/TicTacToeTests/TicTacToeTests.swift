@@ -14,7 +14,10 @@ enum BoardError: Error {
 }
 
 struct Move {
-    let player: String
+    let playerString: String
+    var player: Player {
+        playerString == "X" ? .X : .O
+    }
     let position: Position
 }
 
@@ -27,7 +30,7 @@ struct Board {
             return .failure(.positionIsPlayed)
         }
         var board = self
-        board.moves.append(Move(player: currentPlayer, position: position))
+        board.moves.append(Move(playerString: currentPlayer, position: position))
         board.currentPlayer = nextPlayer()
         return .success(board)
     }
@@ -46,7 +49,7 @@ final class TicTacToeTests: XCTestCase {
         let board = Board()
             .applyMoveUnsafe(Position(x: 0, y: 0))
         
-        XCTAssertEqual(board.moves.last?.player, "X")
+        XCTAssertEqual(board.moves.last?.player, .X)
     }
     
     func testPlayerOGoesSecond() {
@@ -54,7 +57,7 @@ final class TicTacToeTests: XCTestCase {
             .applyMoveUnsafe(Position(x: 0, y: 0))
             .applyMoveUnsafe(Position(x: 1, y: 1))
         
-        XCTAssertEqual(board.moves.last?.player, "O")
+        XCTAssertEqual(board.moves.last?.player, .O)
     }
     
     func testPlayerXGoesThird() {
@@ -63,7 +66,7 @@ final class TicTacToeTests: XCTestCase {
             .applyMoveUnsafe(Position(x: 1, y: 1))
             .applyMoveUnsafe(Position(x: 2, y: 2))
         
-        XCTAssertEqual(board.moves.last?.player, "X")
+        XCTAssertEqual(board.moves.last?.player, .X)
     }
     
     func testPlayerCannotPlayOnPlayedPosition() {
